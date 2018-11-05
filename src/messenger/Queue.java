@@ -10,18 +10,8 @@ public class Queue extends Resource {
 	
 	public boolean add(Message m) {
 		if (messages.size() < maxNumberOfMessages && m.getRecipient() != null) {
-			try {
-			messages.put(m);
+			messages.add(m);
 			return true;
-			}
-			catch(NullPointerException e)
-			{
-				System.out.println("Null value!");
-				return false;
-			} catch (InterruptedException e) {
-				System.out.println("Stack is full!");
-				return false;
-			}
 		}
 		else return false;
 	}

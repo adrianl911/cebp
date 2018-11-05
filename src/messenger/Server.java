@@ -1,6 +1,7 @@
 package messenger;
 
-import java.util.ArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.*;
 
 public class Server {
 	
@@ -9,7 +10,7 @@ public class Server {
 	private int maxNumberOfMessages;
 	private float expirationTime;
 	private Queue queue;
-	private ArrayList<Topic> topics;
+	private ArrayBlockingQueue<Topic> topics;
 	
 	public Server(int maxNumberOfMessages, float timeOut) {
 	    ++uniqueID;
@@ -66,20 +67,26 @@ public class Server {
 	
 	public Topic searchTopicViaType(TopicType type)
 	{
-		for(int i = 0; i < topics.size(); ++i)
+		Iterator<Topic> it = topics.iterator();
+		
+		while(it.hasNext())
 		{
-			if(topics.get(i).getTopicType() == type )
-				return topics.get(i);
+			Topic topic = it.next();
+			if(topic.getTopicType() == type )
+				return topic;
 		}
+		
 		return null;
 	}
 	
 	public void removeExpiredTopics(int timeOut)
 	{
-		for(int i = 0; i < topics.size(); ++i)
+		Iterator<Topic> it = topics.iterator();
+		
+		while(it.hasNext())
 		{
-			if(!topics.get(i).isValid(timeOut) || expirationTime < timeOut)
-				topics.remove(i);
+			if(it.next().isValid(timeOut) || expirationTime < timeOut)
+				it.remove();
 		}
 	}
 	
