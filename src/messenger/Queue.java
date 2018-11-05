@@ -19,13 +19,13 @@ public class Queue extends Resource {
 				System.out.println("Null value!");
 				return false;
 			} catch (InterruptedException e) {
-				System.out.println("Waiting for stack to have space!");
+				System.out.println("Stack is full!");
 				return false;
 			}
 		}
 		else return false;
 	}
-	public Message remove(Message m) {
+	public Message remove() {
 		return messages.remove();
 	}
 	
@@ -34,9 +34,14 @@ public class Queue extends Resource {
 		return "Queue";
 	}
 	
-	public int getNumberOfMessage()
+	public int getMaxNumberOfMessage()
 	{
 		return maxNumberOfMessages;
+	}
+	
+	public int getCurrentSize()
+	{
+		return messages.size();
 	}
 	
 }

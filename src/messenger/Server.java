@@ -8,7 +8,8 @@ public class Server {
 	private int id;
 	private int maxNumberOfMessages;
 	private float expirationTime;
-	private ArrayList resources = new ArrayList <Resource>();
+	private Queue queue;
+	private ArrayList<Topic> topics;
 	
 	public Server(int maxNumberOfMessages, float timeOut) {
 	    ++uniqueID;
@@ -17,16 +18,8 @@ public class Server {
 		this.expirationTime = timeOut;
 	}
 	
-	public boolean addMessage(Resource resource)
-	{
-		if (resources.size() == maxNumberOfMessages)
-			return false;
-		resources.add(resource);
-		return true;
-	}
-	
 	//to be implemented
-	public boolean isValid()
+	public boolean isValid(int i)
 	{
 		return true;
 	}
@@ -41,6 +34,53 @@ public class Server {
 
 	public float getExpirationTime() {
 		return expirationTime;
+	}
+	
+	public boolean recieveMessageQueue(Message m)
+	{
+		if(maxNumberOfMessages > (topics.size() + queue.getCurrentSize()))
+		{
+			queue.add(m);
+			return true;
+		}
+		else return false;
+	}
+	
+	public void sendMessageQueue()
+	{
+		Message m = queue.remove();
+		Client r = m.getRecipient();
+		
+		r.recieveMessageFromServer(m);
+	}
+	
+	public boolean recieveTopic(Topic t)
+	{
+		if(maxNumberOfMessages > (topics.size() + queue.getCurrentSize()))
+		{
+			topics.add(t);
+			return true;
+		}
+		else return false;
+	}
+	
+	public Topic searchTopicViaType(TopicType type)
+	{
+		for(int i = 0; i < topics.size(); ++i)
+		{
+			if(topics.get(i).getTopicType() == type )
+				return topics.get(i);
+		}
+		return null;
+	}
+	
+	public void removeExpiredTopics(int timeOut)
+	{
+		for(int i = 0; i < topics.size(); ++i)
+		{
+			if(!topics.get(i).isValid(timeOut) || expirationTime < timeOut)
+				topics.remove(i);
+		}
 	}
 	
 	
