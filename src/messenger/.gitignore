@@ -5,3 +5,9 @@
 /Server.class
 /Topic.class
 /TopicType.class
+/ClientQueueMessaging.class
+/MainClass.class
+/ServerTimeOutTask.class
+/MyClient.class
+/SendTopicToServer.class
+/SearchForTopic.class

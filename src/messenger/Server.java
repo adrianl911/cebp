@@ -8,15 +8,17 @@ public class Server {
 	private static int uniqueID = 0;
 	private int id;
 	private int maxNumberOfMessages;
-	private float expirationTime;
+	private long expirationTime;
 	private Queue queue;
 	private ArrayBlockingQueue<Topic> topics;
 	
-	public Server(int maxNumberOfMessages, float timeOut) {
+	public Server(int maxNumberOfMessages, long timeOut) {
 	    ++uniqueID;
 	    id = uniqueID;
 		this.maxNumberOfMessages = maxNumberOfMessages;
 		this.expirationTime = timeOut;
+		topics = new ArrayBlockingQueue<Topic>(maxNumberOfMessages);
+		queue = new Queue(maxNumberOfMessages);
 	}
 	
 	//to be implemented
@@ -33,7 +35,7 @@ public class Server {
 		return maxNumberOfMessages;
 	}
 
-	public float getExpirationTime() {
+	public long getExpirationTime() {
 		return expirationTime;
 	}
 	
@@ -50,7 +52,7 @@ public class Server {
 	public void sendMessageQueue()
 	{
 		Message m = queue.remove();
-		Client r = m.getRecipient();
+		MyClient r = m.getRecipient();
 		
 		r.recieveMessageFromServer(m);
 	}
@@ -67,8 +69,14 @@ public class Server {
 	
 	public Topic searchTopicViaType(TopicType type)
 	{
-		Iterator<Topic> it = topics.iterator();
+		if(topics.size() == 0)
+		{
+			System.out.println("Topics expired!");
+			return null;
+		}
 		
+		Iterator<Topic> it = topics.iterator();
+
 		while(it.hasNext())
 		{
 			Topic topic = it.next();
@@ -79,16 +87,21 @@ public class Server {
 		return null;
 	}
 	
-	public void removeExpiredTopics(int timeOut)
+	public void removeExpiredTopics(long timeOut)
 	{
 		Iterator<Topic> it = topics.iterator();
 		
 		while(it.hasNext())
 		{
-			if(it.next().isValid(timeOut) || expirationTime < timeOut)
+			if(!it.next().isValid(timeOut) && expirationTime < timeOut)
 				it.remove();
 		}
 	}
+	
+    public void removeAllTopics()
+    {
+    	topics.clear();
+    }
 	
 	
 }

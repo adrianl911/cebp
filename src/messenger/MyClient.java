@@ -1,6 +1,6 @@
 package messenger;
 
-public class Client {
+public class MyClient {
 
 	private String name;
 	private Message message;
@@ -8,34 +8,10 @@ public class Client {
 	private int currentId;
 	private Server server;
 	
-	public Client(String n)
-	{
-		name = n;
-		++uniqueCounter;
-		currentId = uniqueCounter;
-	}
-	
-	public Client(String n,Message m)
-	{
-		name = n;
-		message = m;
-		++uniqueCounter;
-		currentId = uniqueCounter;
-	}
-	
-	public Client(String n, Server s)
+	public MyClient(String n, Server s)
 	{
 		name = n;
 		server = s;
-		++uniqueCounter;
-		currentId = uniqueCounter;
-	}
-	
-	public Client(String n, Message m, Server s)
-	{
-		name = n;
-		server = s;
-		message = m;
 		++uniqueCounter;
 		currentId = uniqueCounter;
 	}

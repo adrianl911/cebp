@@ -3,7 +3,7 @@ package messenger;
 public class Topic extends Resource {
 	private TopicType topic;
 	private Message message;
-	private int timeOut;
+	private long timeOut;
 	private Server onServer;
 	
 	public TopicType getTopicType() {
@@ -18,7 +18,7 @@ public class Topic extends Resource {
 	}
 	
 	//to be implemented
-	public boolean isValid(int time)
+	public boolean isValid(long time)
 	{
 		return timeOut < time;
 		

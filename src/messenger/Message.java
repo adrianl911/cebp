@@ -2,11 +2,11 @@ package messenger;
 
 public class Message {
 
-	private Client sender;
-	private Client recipient;
+	private MyClient sender;
+	private MyClient recipient;
 	private String content;
 	
-	public Message(String c, Client r, Client s)
+	public Message(String c, MyClient r, MyClient s)
 	{
 		recipient = r;
 		content = c;
@@ -19,7 +19,7 @@ public class Message {
 		recipient = null;
 	}
 	
-	public Client getRecipient()
+	public MyClient getRecipient()
 	{
 		return recipient;
 	}
@@ -29,7 +29,7 @@ public class Message {
 		return content;
 	}
 	
-	public Client getSender()
+	public MyClient getSender()
 	{
 		return sender;
 	}
