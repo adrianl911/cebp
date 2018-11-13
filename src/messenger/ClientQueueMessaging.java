@@ -7,18 +7,15 @@ public class ClientQueueMessaging implements Runnable{
 	private MyClient client;
 	private Server server;
 	
-	ClientQueueMessaging(String s, MyClient c, Server svr)
-	{
+	ClientQueueMessaging(String s, MyClient c, Server svr) {
 		name = s;
 		client = c;
 		server = svr;
 	}
 	
-	public void run()
-	{
+	public void run() {
 		System.out.println("Running thread  " + name);
-		try
-		{
+		try {
 			for(int i = 0; i< 5; ++i) {
 				System.out.println("Sending message... in thread: " + name + " iteration " + i);
 				client.sendMessageViaServer();
@@ -26,19 +23,16 @@ public class ClientQueueMessaging implements Runnable{
 				server.sendMessageQueue();	
 			}
 		}
-		catch(InterruptedException e)
-		{
+		catch(InterruptedException e) {
 			System.out.println("Interruped thread: " + name);
 		}
 		System.out.println("Exiting thread: " + name);
 	}
 	
 	
-	public void start()
-	{
+	public void start() {
 		System.out.println("Start thread " + name);
-		if(t == null)
-		{
+		if(t == null) {
 			t = new Thread(this, name);
 			t.start();
 		}

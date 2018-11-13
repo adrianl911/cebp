@@ -22,8 +22,7 @@ public class Server {
 	}
 	
 	//to be implemented
-	public boolean isValid(int i)
-	{
+	public boolean isValid(int i) {
 		return true;
 	}
 
@@ -39,46 +38,38 @@ public class Server {
 		return expirationTime;
 	}
 	
-	public boolean recieveMessageQueue(Message m)
-	{
-		if(maxNumberOfMessages > (topics.size() + queue.getCurrentSize()))
-		{
+	public boolean receiveMessageQueue(Message m) {
+		if(maxNumberOfMessages > (topics.size() + queue.getCurrentSize())) {
 			queue.add(m);
 			return true;
 		}
 		else return false;
 	}
 	
-	public void sendMessageQueue()
-	{
+	public void sendMessageQueue() {
 		Message m = queue.remove();
 		MyClient r = m.getRecipient();
 		
-		r.recieveMessageFromServer(m);
+		r.receiveMessageFromServer(m);
 	}
 	
-	public boolean recieveTopic(Topic t)
-	{
-		if(maxNumberOfMessages > (topics.size() + queue.getCurrentSize()))
-		{
+	public boolean receiveTopic(Topic t) {
+		if(maxNumberOfMessages > (topics.size() + queue.getCurrentSize())) {
 			topics.add(t);
 			return true;
 		}
 		else return false;
 	}
 	
-	public Topic searchTopicViaType(TopicType type)
-	{
-		if(topics.size() == 0)
-		{
+	public Topic searchTopicViaType(TopicType type) {
+		if(topics.size() == 0) {
 			System.out.println("Topics expired!");
 			return null;
 		}
 		
 		Iterator<Topic> it = topics.iterator();
 
-		while(it.hasNext())
-		{
+		while(it.hasNext()) {
 			Topic topic = it.next();
 			if(topic.getTopicType() == type )
 				return topic;
@@ -87,8 +78,7 @@ public class Server {
 		return null;
 	}
 	
-	public void removeExpiredTopics(long timeOut)
-	{
+	public void removeExpiredTopics(long timeOut) {
 		Iterator<Topic> it = topics.iterator();
 		
 		while(it.hasNext())
@@ -98,8 +88,7 @@ public class Server {
 		}
 	}
 	
-    public void removeAllTopics()
-    {
+    public void removeAllTopics() {
     	topics.clear();
     }
 	

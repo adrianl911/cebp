@@ -13,7 +13,7 @@ public class MainClass {
 		Message message1 =  new Message("Hello there!", eme, ale);
 		Message message2 = new Message("Hi, Ale!", ale, eme);
 		
-		Message message3 = new Message("Lord of the rings is awsome!", null, iulia);
+		Message message3 = new Message("The Lord of the Rings is awesome!", null, iulia);
 		Message message4 = new Message("Steelheart is a good book!", null, adi);
 				
 	

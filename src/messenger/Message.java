@@ -6,36 +6,30 @@ public class Message {
 	private MyClient recipient;
 	private String content;
 	
-	public Message(String c, MyClient r, MyClient s)
-	{
+	public Message(String c, MyClient r, MyClient s) {
 		recipient = r;
 		content = c;
 		sender = s;
 	}
 	
-	public Message(String c)
-	{
+	public Message(String c) {
 		content = c;
 		recipient = null;
 	}
 	
-	public MyClient getRecipient()
-	{
+	public MyClient getRecipient() {
 		return recipient;
 	}
 	
-	public String getContent()
-	{
+	public String getContent() {
 		return content;
 	}
 	
-	public MyClient getSender()
-	{
+	public MyClient getSender() {
 		return sender;
 	}
 	
-	public String getSenderAsString()
-	{
+	public String getSenderAsString() {
 		return sender.getName();
 	}
 }

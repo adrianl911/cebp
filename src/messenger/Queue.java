@@ -9,8 +9,7 @@ public class Queue extends Resource {
 	// ArrayBlockingQueue is good when multiple threads are used
 	private ArrayBlockingQueue<Message> messages;
 	
-	Queue(int maxNumberOfMessages)
-	{
+	Queue(int maxNumberOfMessages) {
 		this.maxNumberOfMessages = maxNumberOfMessages;
 		messages = new ArrayBlockingQueue<Message>(maxNumberOfMessages);
 	}
@@ -23,15 +22,13 @@ public class Queue extends Resource {
 		else return false;
 	}
 	public Message remove(){
-		if(messages.size() == 0)
-		{
+		if(messages.size() == 0) {
 			System.out.println("No messages availble!");
 			return null;
 		}
 		Iterator<Message> it = messages.iterator();
 		Message tmp = it.next();
-		if( tmp  == null )
-		{
+		if( tmp  == null ) {
 			System.out.print("No next element");
 			return null;
 		}
@@ -44,13 +41,11 @@ public class Queue extends Resource {
 		return "Queue";
 	}
 	
-	public int getMaxNumberOfMessage()
-	{
+	public int getMaxNumberOfMessage() {
 		return maxNumberOfMessages;
 	}
 	
-	public int getCurrentSize()
-	{
+	public int getCurrentSize() {
 		return messages.size();
 	}
 	

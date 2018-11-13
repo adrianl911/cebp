@@ -18,14 +18,12 @@ public class Topic extends Resource {
 	}
 	
 	//to be implemented
-	public boolean isValid(long time)
-	{
+	public boolean isValid(long time) {
 		return timeOut < time;
 		
 	}
 	
-	public Message getMessage()
-	{
+	public Message getMessage() {
 		return message;
 	}
 	
@@ -34,8 +32,7 @@ public class Topic extends Resource {
 		return "Resource";
 	}
 	
-	public float getTimeOut()
-	{
+	public float getTimeOut() {
 		return timeOut;
 	}
 }

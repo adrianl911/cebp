@@ -7,35 +7,29 @@ public class SearchForTopic implements Runnable{
 		private String name;
 		private TopicType type;
 		
-		SearchForTopic(String str, MyClient c,TopicType t)
-		{
+		SearchForTopic(String str, MyClient c,TopicType t) {
 			name = str;
 			client = c;
 			type = t;
 		}
 		
-		public void start()
-		{
-			if(t == null)
-			{
+		public void start() {
+			if(t == null) {
 				t = new Thread(this, name);
 				t.start();
 			}
 		}
 		
-		public void run()
-		{
+		public void run() {
 			System.out.println("Running thread  " + name);
-			try
-			{
+			try {
 				for(int i = 0; i< 5; ++i) {
 					System.out.println("Searching for topic... in thread: " + name + " iteration " + i);
 					client.readTopic(type);
 					Thread.sleep(50);
 				}
 			}
-			catch(InterruptedException e)
-			{
+			catch(InterruptedException e) {
 				System.out.println("Interruped thread: " + name);
 			}
 			System.out.println("Exiting thread: " + name);
